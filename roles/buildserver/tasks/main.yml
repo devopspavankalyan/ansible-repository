@@ -1,0 +1,43 @@
+---
+# tasks file for buildserver
+- name: install git
+  yum:
+   name: git
+   state: latest
+
+- name: install java
+  yum:
+   name: java-1.8.0-openjdk-devel
+   state: latest
+
+- name: download and unarchive  Maven
+  unarchive:
+   src: https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+   dest: /opt/
+   remote_src: True
+
+- name: Insert a line at the end of a file.
+  lineinfile:
+   path: ~/.bashrc
+   line: PATH=$PATH:/opt/apache-maven-3.6.3/bin
+
+- name: download and unarchive  npm
+  unarchive:
+   src: https://nodejs.org/dist/v14.16.0/node-v14.16.0-linux-x64.tar.xz
+   dest: /opt/
+   remote_src: True
+
+- name: Insert a line at the end of a file.
+  lineinfile:
+   path: ~/.bashrc
+   line: PATH=$PATH:/opt/node-v14.16.0-linux-x64/bin
+
+- name: download frontend
+  get_url:
+   url: https://github.com/jagarlamudisrinath/xwiggy-frontend.git
+   dest: /home/centos
+
+- name: download backend
+  get_url:
+   url: https://github.com/jagarlamudisrinath/xwiggy-backend.git
+   dest: /home/centos
