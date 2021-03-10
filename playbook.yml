@@ -1,0 +1,18 @@
+---
+- hosts: buildservers
+  become: yes
+  roles:
+   - buildserver
+- hosts: webservers
+  become: yes
+  roles:
+   - webserver
+- hosts: appservers
+  become: yes
+  roles:
+   - appserver
+- hosts: dbservers
+  become: yes
+  roles
+   - dbserver
+
