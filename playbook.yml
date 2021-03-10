@@ -13,6 +13,6 @@
    - appserver
 - hosts: dbservers
   become: yes
-  roles
+  roles:
    - dbserver
 
