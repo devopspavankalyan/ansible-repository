@@ -1,0 +1,22 @@
+---
+# tasks file for webserver
+- name: install epel-relase
+  yum:
+   name: epel-release
+   state: latest
+  tags:
+  - install epel-relase
+
+- name: install nginx
+  yum:
+   name: nginx
+   state: latest
+  tags:
+  - install nginx
+
+- name: start nginx
+  service:
+   name: nginx
+   state: started
+  tags:
+  - start nginx

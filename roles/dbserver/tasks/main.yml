@@ -1,0 +1,52 @@
+---
+- name: installing python
+  yum:
+   name: MySQL-python
+   state: installed
+  tags: mtsql-python
+
+- name: install epel-release
+  yum:
+   name: epel-release
+   state: latest
+  tags: install epel-release
+
+- name: download repo
+  get_url:
+   url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+   dest: /opt/
+  tags: download repo
+
+- name: install rpm
+  yum:
+   name: /opt/mysql-community-release-el7-5.noarch.rpm
+   state: present
+  tags: install rpm
+
+- name: install mysql
+  yum:
+   name: mysql-server
+   state: latest
+  tags: install mysql
+
+- name: start service mysql-server
+  service:
+   name: mysqld
+   state: started
+   enabled: yes
+  tags: start mysql-server
+
+- name: CREATE DATABASE IF NOT EXISTS
+  mysql_db:
+   name: myusers
+   state: present
+  tags: create database 
+
+- name: create mysql user
+  mysql_user:
+   name: mysql
+   password: "Test@123"
+   priv: '*.*:ALL'
+   state: present
+  tags: create mysql user
+
